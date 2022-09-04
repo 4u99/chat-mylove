@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta content="width=100%, initial-scale=1" name="viewport">
+    <title>一周年快乐</title>
+    <link href="css/main.min.css" rel="stylesheet" type="text/css">
+    <link as="image" href="img/love-the-girl.jpg" rel="preload">
+    <link as="image" href="img/yq.jpg" rel="preload">
+    <link as="image" href="img/pgj.png" rel="preload">
+    <link as="image" href="img/lucky-me.jpg" rel="preload">
+    <link as="image" href="img/breakfast.jpg" rel="preload">
+    <link as="image" href="img/exercise-together.jpg" rel="preload">
+    <link as="image" href="img/travel.jpg" rel="preload">
+    <link as="image" href="img/foot.jpeg" rel="preload">
+    <link as="image" href="img/marry-me.png" rel="preload">
+    <link as="image" href="img/kiss-my-princess.png" rel="preload">
+</head>
+<body>
+<div :class="{ 'has-prompt': hasPrompt }" id="mobile">
+    <div id="mobile-head">
+        <div id="mobile-head-title">与黑鬼聊天中</div>
+    </div>
+    <div id="mobile-body">
+        <div id="mobile-body-bg"></div>
+        <div id="mobile-body-content">
+            <div class="msg-row" id="mock-msg-row">
+                <div class="msg" id="mock-msg" v-html="latestMsgContent"></div>
+            </div>
+            <div :class="msg.author === 'author' ? 'msg-author' : 'msg-me'"
+                 :key="index"
+                 class="msg-row"
+                 v-for="(msg, index) in messages">
+                <div :class="'msg-bounce-in-' + (msg.author === 'author' ? 'left': 'right')"
+                     :style="msg.width && msg.height && {width: msg.width - 26 + 'px', height: msg.height - 18 + 'px'}"
+                     class="msg"
+                     v-html="msg.content"></div>
+            </div>
+        </div>
+    </div>
+    <div id="mobile-foot">
+        <div id="prompt">
+            <div id="prompt-head">
+                <div class="say-something">睛睛输入中……</div>
+                <a class="close-btn" href="javascript:"
+                   v-on:click="togglePrompt(false)"></a>
+            </div>
+            <div id="prompt-body">
+                <ul class="responses" v-if="lastDialog">
+                    <li v-for="res in lastDialog.responses">
+                        <a href="javascript:" v-on:click="respond(res)">{{ res.content }}</a>
+                    </li>
+                </ul>
+                <div class="next-topic"
+                     v-if="!lastDialog || !lastDialog.responses">
+                    <ul class="topics">
+                        <li v-for="topic in nextTopics">
+                            <a href="javascript:" v-on:click="ask(topic)">{{ topic.brief }}</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div :class="{'clickable': !isTyping }" class="say-something"
+             id="input-hint"
+             v-on:click="togglePrompt(true)">
+            <span v-if="!isTyping">睛睛输入中……</span>
+            <span v-if="isTyping">黑鬼正在输入中</span>
+        </div>
+    </div>
+    <div id="prompt-bg" v-on:click="togglePrompt(false)"></div>
+</div>
+
+<div class="extra-link" id="meta-link">
+    <a class="letters" href="https://4u99.github.io/lovejingjing" target="_blank">
+        爱你睛睛
+    </a>
+</div>
+
+<script src="//cdn.bootcss.com/zepto/1.2.0/zepto.min.js"></script>
+<script src="//cdn.bootcss.com/vue/2.2.6/vue.min.js"></script>
+
+<script src="js/index-min.js"></script>
+</body>
+</html>
