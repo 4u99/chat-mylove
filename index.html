@@ -19,7 +19,11 @@
 <body>
 <div :class="{ 'has-prompt': hasPrompt }" id="mobile">
     <div id="mobile-head">
-        <div id="mobile-head-title">与黑鬼聊天中</div>
+        <div id="mobile-head-title">
+            <audio autoplay="autoplay" controls="controls" style="text-align: center">
+                <source src="song.mp3" type="audio/mp3"/>
+            </audio>
+        </div>
     </div>
     <div id="mobile-body">
         <div id="mobile-body-bg"></div>
